@@ -5,23 +5,31 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatMenuModule} from "@angular/material/menu";
-import { NavbarComponent } from './navbar/navbar.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { PlayersComponent } from './pages/players/players.component';
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatTableModule} from "@angular/material/table";
 import {MatListModule} from "@angular/material/list";
 import { TournamentComponent } from './pages/tournament/tournament.component';
+import { MenuComponent } from './menu/menu.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { PlayerFormComponent } from './pages/players/player-form/player-form.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     PlayersComponent,
-    TournamentComponent
+    TournamentComponent,
+    MenuComponent,
+    PlayerFormComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,14 @@ import { TournamentComponent } from './pages/tournament/tournament.component';
     FormsModule,
     MatExpansionModule,
     MatTableModule,
-    MatListModule
+    MatListModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    DragDropModule,
+    MatTooltipModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

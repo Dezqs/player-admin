@@ -4,7 +4,7 @@ import {PlayersComponent} from "./pages/players/players.component";
 import {TournamentComponent} from "./pages/tournament/tournament.component";
 
 const routes: Routes = [
-  {path: 'players', component: PlayersComponent},
+  {path: 'players', component: PlayersComponent, },
   {path: 'tournament', component: TournamentComponent}
 ];
 

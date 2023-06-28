@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {IPlayer} from "../../interfaces/IPlayer";
 import {PlayerService} from "../../core/services/player.service";
+import {AdminService} from "../../core/services/admin.service";
 import {Router} from "@angular/router";
-import {IRankedTournament} from "../../interfaces/IRankedTournament";
-import {MatTableDataSource} from "@angular/material/table";
+import {PlayerFormComponent} from "./player-form/player-form.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-players',
@@ -13,17 +14,37 @@ import {MatTableDataSource} from "@angular/material/table";
 export class PlayersComponent implements OnInit {
 
   public players : IPlayer[] = []
-  public dataSource: MatTableDataSource<IRankedTournament> = new MatTableDataSource<IRankedTournament>([]);
+
   constructor(private readonly router: Router,
-              private readonly playerService: PlayerService) { }
+              public dialog: MatDialog,
+              private readonly playerService: PlayerService,
+              private readonly adminService : AdminService) { }
 
   ngOnInit(): void {
+    this.refreshPlayers()
+  }
+
+  public addAPlayer(): void {
+    const dialogRef = this.dialog.open(PlayerFormComponent, { width: '500px' });
+    dialogRef.afterClosed().subscribe((result: IPlayer) => {
+      this.refreshPlayers()
+    });
+  }
+
+  public refreshPlayers(): void{
     this.playerService.getAllPlayers().subscribe({
       next: res => {
         console.log(res);
         this.players = res;
       },
       error: err => console.error('error while getting artists', err)
+    });
+  }
+
+  public deletePlayer(player: IPlayer): void {
+    this.adminService.deletePlayer(player).subscribe({
+      next: () => this.refreshPlayers(),
+      error: err => console.error('error while deleting document', err)
     });
   }
 }

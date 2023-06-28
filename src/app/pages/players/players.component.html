@@ -1,16 +1,33 @@
-<mat-accordion>
-  <mat-expansion-panel hideToggle *ngFor="let player of players">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{player.pseudo | uppercase}}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-list *ngFor="let game of player.games;">
-      <mat-list-item><h4>Tournament : {{game.tournament | uppercase}}</h4></mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item><span class="mat-badge">Ranking : {{game.ranking}}</span></mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item><p>Points : {{game.points}}</p></mat-list-item>
-    </mat-list>
-  </mat-expansion-panel>
-</mat-accordion>
+<main>
+  <h2>List of all players</h2>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle *ngFor="let player of players">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{player.pseudo | uppercase}}
+          <section>
+            <button mat-icon-button color="primary" matTooltip="delete player" (click)="deletePlayer(player)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" matTooltip="update player" >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </section>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list *ngFor="let game of player.games;">
+        <mat-list-item><h4>Tournament : {{game.tournament | uppercase}}</h4></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><span class="mat-badge">Ranking : {{game.ranking}}</span></mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><p>Points : {{game.points}}</p></mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <br>
+  <section class="actions">
+    <button mat-fab color="primary" matTooltip="Add a new player's game" (click)="addAPlayer()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </section>
+</main>

@@ -1,0 +1,19 @@
+main {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  mat-panel-title{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  section.actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}

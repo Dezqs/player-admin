@@ -1,0 +1,39 @@
+<main>
+
+  <form [formGroup]="playerForm">
+
+    <mat-form-field>
+      <mat-label>Pseudo</mat-label>
+      <input matInput placeholder="pseudo" formControlName="pseudo" >
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tournament</mat-label>
+      <input matInput placeholder="tournament name" formControlName="tournament">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Points</mat-label>
+      <input matInput placeholder="points in tournament" formControlName="points" type="number">
+    </mat-form-field>
+
+    <div class="row-actions">
+
+      <button mat-stroked-button class="small"
+              (click)="cancel()">
+        Annuler
+      </button>
+
+      <button mat-stroked-button type="submit"
+              color="primary"
+              class="small"
+              (click)="addGame()"
+              [disabled]="!playerForm.valid">
+        Envoyer
+      </button>
+    </div>
+
+  </form>
+
+</main>
+
