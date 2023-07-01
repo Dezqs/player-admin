@@ -14,6 +14,7 @@ import {MatDialog} from "@angular/material/dialog";
 export class PlayersComponent implements OnInit {
 
   public players : IPlayer[] = []
+  public allPlayers : IPlayer[] = []
 
   constructor(private readonly router: Router,
               public dialog: MatDialog,
@@ -36,6 +37,7 @@ export class PlayersComponent implements OnInit {
       next: res => {
         console.log(res);
         this.players = res;
+        this.allPlayers = res;
       },
       error: err => console.error('error while getting artists', err)
     });
@@ -46,5 +48,34 @@ export class PlayersComponent implements OnInit {
       next: () => this.refreshPlayers(),
       error: err => console.error('error while deleting document', err)
     });
+  }
+
+  //TODO
+  public updatePlayer(player: IPlayer) {
+    const dialogRef = this.dialog.open(PlayerFormComponent, { width: '500px' });
+    dialogRef.afterClosed().subscribe((result: IPlayer) => {
+      this.refreshPlayers()
+    });
+  }
+
+  public searchPlayer(event: any) {
+    const search = event.target.value;
+    if (search) {
+      this.players = this.allPlayers
+        .filter(a => a.pseudo.toUpperCase().startsWith(search.toUpperCase()))
+    }else{
+      this.players = this.allPlayers
+    }
+  }
+
+  public searchPlayerByTournament(event: any) {
+    const search = event.target.value;
+    if (search) {
+      this.players = this.allPlayers
+        .filter(a => a.games
+          .find(game => game.tournament.toUpperCase().startsWith(search.toUpperCase())))
+    }else{
+      this.players = this.allPlayers
+    }
   }
 }

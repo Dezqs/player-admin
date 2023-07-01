@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 import {GameService} from "../../../core/services/game.service";
+import {IPlayer} from "../../../interfaces/IPlayer";
 
 @Component({
   selector: 'app-player-form',

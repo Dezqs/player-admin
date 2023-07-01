@@ -1,8 +1,49 @@
-<section class="actions">
-  <mat-form-field>
-    <mat-label>Tournament</mat-label>
-    <!--<input matInput placeholder="Chercher un artiste" type="text" (keyup)="searchArtist($event)">-->
-    <input matInput placeholder="Find a tournament by it's name" type="text">
-    <mat-icon matSuffix style="color: grey;">search</mat-icon>
-  </mat-form-field>
-</section>
+<main>
+  <section class="actions">
+    <mat-form-field>
+      <mat-label>Tournament</mat-label>
+      <input matInput placeholder="Find tournament by name" type="text" (keyup)="searchTournament($event)">
+      <mat-icon matSuffix style="color: grey;">search</mat-icon>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Player</mat-label>
+      <input matInput placeholder="Find tournaments by player" type="text" (keyup)="searchPlayerTournaments($event)">
+      <mat-icon matSuffix style="color: grey;">search</mat-icon>
+    </mat-form-field>
+  </section>
+
+
+  <section class="content">
+    <h2>List of tournaments</h2>
+    <mat-accordion>
+      <mat-expansion-panel hideToggle *ngFor="let tournament of tournaments">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{tournament.tournamentName | uppercase}}
+            <section>
+              <button mat-icon-button color="primary" matTooltip="delete player" (click)="delete(tournament)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" matTooltip="update player">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </section>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list *ngFor="let player of tournament.players;">
+          <mat-list-item><h4>Pseudo : {{player.pseudo | uppercase}}</h4></mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item><span class="mat-badge">Ranking : {{player.ranking}}</span></mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item><p>Points : {{player.pointsInTournament}}</p></mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <section class="actions">
+      <button mat-fab color="primary" matTooltip="Add a new player's game" (click)="addGame()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </section>
+  </section>
+</main>
